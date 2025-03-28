@@ -1,13 +1,16 @@
-﻿namespace dotnet
+﻿using System;
+using Newtonsoft.Json;
+
+namespace dotnet
 {
     class Personne
     {
-        public string Nom { get; set; }
-        public int Age { get; set; }
+        public string nom { get; set; }
+        public int age { get; set; }
 
         public string Hello(bool isLowercase)
         {
-            string message = $"hello {Nom}, you are {Age}";
+            string message = $"hello {nom}, you are {age}";
             return isLowercase ? message.ToLower() : message.ToUpper();
         }
     }
@@ -18,12 +21,12 @@
         {
             Personne personne = new Personne
             {
-                Nom = "Alice",
-                Age = 30
+                nom = "Alice",
+                age = 30
             };
 
-            Console.WriteLine(personne.Hello(true));
-            Console.WriteLine(personne.Hello(false));
+            string json = JsonConvert.SerializeObject(personne, Formatting.Indented);
+            Console.WriteLine(json);
         }
     }
 }
